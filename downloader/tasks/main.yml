@@ -1,0 +1,27 @@
+---
+# tasks file for downloader
+  - name: Install Common Python parts
+    apt: name="{{item}}" state=installed
+    with_items:
+      - python
+      - python-setuptools
+      - python-dev
+      - build-essential
+      - python-pip
+      - libmysqlclient-dev
+
+  - name: Install codec
+    apt: name=ffmpeg state=installed
+
+  - name: Install downloader
+    pip: 
+      name: youtube-dl 
+    
+  - name: Get the files
+    command: youtube-dl "{{ item }}"
+    with_items:
+      - "{{ downloaditems }}"
+
+  - name: Find images
+    
+
